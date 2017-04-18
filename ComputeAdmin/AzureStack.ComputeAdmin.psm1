@@ -160,11 +160,11 @@ Function Add-VMImage{
     }
 
     #same for storage
-    $storageAccount = Get-AzureRmStorageAccount -Name $storageAccountName -ResourceGroupName $resourceGroupName -ErrorAction SilentlyContinue
+    $storageAccount = Get-AzureRmStorageAccount -Name $storageAccountName -ResourceGroupName $resourceGroupName -Location $location -ErrorAction SilentlyContinue
     if (-not ($storageAccount)) {
         $storageAccount = New-AzureRmStorageAccount -Name $storageAccountName -Location $location -ResourceGroupName $resourceGroupName -Type Standard_LRS
     }
-    Set-AzureRmCurrentStorageAccount -StorageAccountName $storageAccountName -ResourceGroupName $resourceGroupName
+    Set-AzureRmCurrentStorageAccount -StorageAccountName $storageAccountName -ResourceGroupName $resourceGroupName -Location $location
     #same for container
     $container = Get-AzureStorageContainer -Name $containerName -ErrorAction SilentlyContinue
     if (-not ($container)) {
